@@ -48,5 +48,22 @@ let app = new Vue({
             this.newNote.description = '';
             this.newNote.deadline = '';
         },
+        deleteNote(noteId) {
+            Object.keys(this.columns).forEach(column => {
+                this.columns[column] = this.columns[column].filter(note => note.id !== noteId);
+            });
+        },
+        editNote(note) {
+            const newTitle = prompt('Введите новый заголовок:', note.title);
+            const newDescription = prompt('Введите новое описание:', note.description);
+            const newDeadline = prompt('Введите новый дэдлайн:', note.deadline);
+
+            if (newTitle && newDescription && newDeadline) {
+                note.title = newTitle;
+                note.description = newDescription;
+                note.deadline = newDeadline;
+                note.lastEdited = new Date().toLocaleString();
+            }
+        },
     }
 });

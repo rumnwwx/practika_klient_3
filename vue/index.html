@@ -23,6 +23,8 @@
                     <p v-if="note.deadline">Дэдлайн: {{ note.deadline }}</p>
                     <p v-if="note.lastEdited">Последнее редактирование: {{ note.lastEdited }}</p>
                     <p v-if="note.isLate" style="color: red;">Просрочено!</p>
+                    <button @click="editNote(note)">Редактировать</button>
+                    <button @click="deleteNote(note.id)">Удалить</button>
                 </div>
 
                 <div class="form-container" v-if="columnName === 'planned'">
