@@ -1,7 +1,9 @@
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -13,4 +15,103 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+}
+
+.column {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.column-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.column h2 {
+    font-size: 22px;
+    color: #2e3a59;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.note {
+    background: #ffebee;
+    border-left: 6px solid #ff4081;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.note-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #d32f2f;
+}
+
+.note p {
+    font-size: 14px;
+    color: #555;
+    margin-top: 8px;
+}
+
+.note button {
+    margin-top: 10px;
+    padding: 6px 10px;
+    background: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.note button:hover {
+    background: #f50057;
+}
+
+.form-container {
+    background: #fff3f3;
+    border: 2px dashed #ff4081;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container h3 {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+.form-container input, .form-container textarea {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-container input:focus, .form-container textarea:focus {
+    outline: none;
+    border-color: #ff4081;
+}
+
+.form-container button {
+    background: #ff4081;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.form-container button:hover {
+    background: #f50057;
 }
