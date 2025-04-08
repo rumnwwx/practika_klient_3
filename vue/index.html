@@ -16,6 +16,22 @@
             <div class="column-inner">
                 <h2>{{ columnTitles[columnName] }}</h2>
 
+                <div v-for="note in columnNotes" :key="note.id" class="note">
+                    <h3 class="note-title">{{ note.title }}</h3>
+                    <p>{{ note.description }}</p>
+                    <p>Создано: {{ note.createdDate }}</p>
+                    <p v-if="note.deadline">Дэдлайн: {{ note.deadline }}</p>
+                    <p v-if="note.lastEdited">Последнее редактирование: {{ note.lastEdited }}</p>
+                    <p v-if="note.isLate" style="color: red;">Просрочено!</p>
+                </div>
+
+                <div class="form-container" v-if="columnName === 'planned'">
+                    <h3>Добавить новую задачу</h3>
+                    <input v-model="newNote.title" placeholder="Заголовок задачи">
+                    <textarea v-model="newNote.description" placeholder="Описание задачи"></textarea>
+                    <input type="date" v-model="newNote.deadline" placeholder="Дэдлайн">
+                    <button @click="addNote('planned')">Создать задачу</button>
+                </div>
             </div>
         </div>
     </div>
