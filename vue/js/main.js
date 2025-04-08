@@ -53,6 +53,31 @@ let app = new Vue({
                 this.columns[column] = this.columns[column].filter(note => note.id !== noteId);
             });
         },
+        moveNote(noteId, fromColumn, toColumn) {
+            const noteIndex = this.columns[fromColumn].findIndex(note => note.id === noteId);
+            if (noteIndex !== -1) {
+                const note = this.columns[fromColumn].splice(noteIndex, 1)[0];
+                note.lastEdited = new Date().toLocaleString();
+
+                if (toColumn === 'done') {
+                    this.markDeadlineStatus(note);
+                }
+
+                this.columns[toColumn].push(note);
+            }
+        },
+        moveNoteBackToInProgress(noteId) {
+            const noteIndex = this.columns.done.findIndex(note => note.id === noteId);
+            if (noteIndex !== -1) {
+                const note = this.columns.done.splice(noteIndex, 1)[0];
+                const reason = prompt('Укажите причину возврата задачи в "В работу"');
+                if (reason) {
+                    note.returnReason = reason;
+                    this.columns.inProgress.push(note);
+                    note.lastEdited = new Date().toLocaleString();
+                }
+            }
+        },
         editNote(note) {
             const newTitle = prompt('Введите новый заголовок:', note.title);
             const newDescription = prompt('Введите новое описание:', note.description);
@@ -65,5 +90,14 @@ let app = new Vue({
                 note.lastEdited = new Date().toLocaleString();
             }
         },
+        markDeadlineStatus(note) {
+            const deadlineDate = new Date(note.deadline);
+            const completedDate = new Date(note.createdDate);
+            if (completedDate > deadlineDate) {
+                note.isLate = true;
+            } else {
+                note.isLate = false;
+            }
+        }
     }
 });

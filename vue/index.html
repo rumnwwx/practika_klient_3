@@ -23,8 +23,15 @@
                     <p v-if="note.deadline">Дэдлайн: {{ note.deadline }}</p>
                     <p v-if="note.lastEdited">Последнее редактирование: {{ note.lastEdited }}</p>
                     <p v-if="note.isLate" style="color: red;">Просрочено!</p>
+                    <p v-if="note.returnReason"><strong>Причина возврата:</strong> {{ note.returnReason }}</p>
+
                     <button @click="editNote(note)">Редактировать</button>
                     <button @click="deleteNote(note.id)">Удалить</button>
+
+                    <button v-if="columnName === 'planned'" @click="moveNote(note.id, 'planned', 'inProgress')">Переместить в 'В работе'</button>
+                    <button v-if="columnName === 'inProgress'" @click="moveNote(note.id, 'inProgress', 'testing')">Переместить в 'Тестирование'</button>
+                    <button v-if="columnName === 'testing'" @click="moveNote(note.id, 'testing', 'done')">Переместить в 'Выполненные'</button>
+                    <button v-if="columnName === 'done'" @click="moveNoteBackToInProgress(note.id)">Возврат в 'В работе'</button>
                 </div>
 
                 <div class="form-container" v-if="columnName === 'planned'">
