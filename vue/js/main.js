@@ -25,6 +25,20 @@ let app = new Vue({
             done: Infinity,
         },
     },
+    created() {
+        const savedData = localStorage.getItem('kanbanAppData');
+        if (savedData) {
+            this.columns = JSON.parse(savedData);
+        }
+    },
+    watch: {
+        columns: {
+            handler() {
+                localStorage.setItem('kanbanAppData', JSON.stringify(this.columns));
+            },
+            deep: true
+        }
+    },
     methods: {
         addNote(column) {
             if (this.columns[column].length >= this.columnLimits[column]) {
@@ -88,6 +102,7 @@ let app = new Vue({
                 note.description = newDescription;
                 note.deadline = newDeadline;
                 note.lastEdited = new Date().toLocaleString();
+                this.markDeadlineStatus(note);
             }
         },
         markDeadlineStatus(note) {
